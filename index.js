@@ -19,10 +19,30 @@ export default class Subscribe {
   set = (key, data) => {
     wareHouse[this.__id].data[key] = data;
   };
-  get(key) {
+  get = (key) => {
     return wareHouse[this.__id].data[key];
   };
+
+  remove_data = (key) => {
+    delete wareHouse[this.__id].data[key];
+  }
+
+  remove_event = (key) => {
+    delete wareHouse[this.__id].events[key];
+  }
+
+  clear_data = () => {
+    delete wareHouse[this.__id].data;
+    wareHouse[this.__id].data = {};
+  }
+
+  clear_events = () => {
+    delete wareHouse[this.__id].events;
+    wareHouse[this.__id].events = {};
+  }
+
   static showWareHouse() {
     console.log(wareHouse);
-  }
+  };
+  
 }
