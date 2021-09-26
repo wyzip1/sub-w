@@ -1,24 +1,26 @@
-const wareHouse = {
-  id: 1,
-}
+const wareHouse = { }
 
 export default class Subscribe {
-  constructor() {
-    this.__id = wareHouse.id;
-    wareHouse[wareHouse.id] = {
+
+  constructor(data = {}) {
+    this.__id = guid();
+    wareHouse[this.__id] = {
       events: {},
-      data: {}
+      data: {...data}
     };
-    wareHouse.id++;
   }
+
   on = (key, cb) => wareHouse[this.__id].events[key] = cb;
+
   emit = (key, props) => {
     if (typeof wareHouse[this.__id].events[key] !== 'function') return;
     wareHouse[this.__id].events[key](props);
   }
+
   set = (key, data) => {
     wareHouse[this.__id].data[key] = data;
   };
+
   get = (key) => {
     return wareHouse[this.__id].data[key];
   };
@@ -45,4 +47,12 @@ export default class Subscribe {
     console.log(wareHouse);
   };
   
+}
+
+function guid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+  });
 }
