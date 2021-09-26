@@ -1,4 +1,4 @@
-# subscribe-wy
+# sub-w
 
 ## use
 ```JavaScript
